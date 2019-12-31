@@ -1,18 +1,18 @@
-import firebase from 'firebase/app'; //pull in firebase util library
-//always need this base import, give access to firestore and auth
+import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
 const config = {
-  apiKey: 'AIzaSyCEnme_yL-KvW1JL52zhcXc4xxJIeDBUgk',
-  authDomain: 'e-commerce-17ceb.firebaseapp.com',
-  databaseURL: 'https://e-commerce-17ceb.firebaseio.com',
-  projectId: 'e-commerce-17ceb',
-  storageBucket: 'e-commerce-17ceb.appspot.com',
-  messagingSenderId: '609928618360',
-  appId: '1:609928618360:web:557638e3eb36c9d9b8288d',
-  measurementId: 'G-W3FQDWPMWH'
+  apiKey: 'AIzaSyCdHT-AYHXjF7wOrfAchX4PIm3cSj5tn14',
+  authDomain: 'crwn-db.firebaseapp.com',
+  databaseURL: 'https://crwn-db.firebaseio.com',
+  projectId: 'crwn-db',
+  storageBucket: 'crwn-db.appspot.com',
+  messagingSenderId: '850995411664',
+  appId: '1:850995411664:web:7ddc01d597846f65'
 };
+
+firebase.initializeApp(config);
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
@@ -24,7 +24,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
-
     try {
       await userRef.set({
         displayName,
@@ -40,13 +39,11 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
-firebase.initializeApp(config);
-
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
-const provider = new firebase.auth.GoogleAuthProvider(); //give access to auth provider class
-provider.setCustomParameters({ prompt: 'select_account' }); //trigger pop up
+const provider = new firebase.auth.GoogleAuthProvider();
+provider.setCustomParameters({ prompt: 'select_account' });
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
 export default firebase;
